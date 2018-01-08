@@ -1,0 +1,25 @@
+{
+    "name": "d946/brackets",
+    "description": "Library to parse brackets",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Sergey Fedorov",
+            "email": "d946@mail.ru"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^6.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "D946\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "D946\\Tests\\": "tests/"
+        }
+    }
+}
