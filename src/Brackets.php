@@ -6,8 +6,11 @@ namespace D946;
 
 class Brackets
 {
+    const OPENING_BRACKET = '(';
 
-    protected $allowChar = ['(', ')', ' ', "\t", "\n", "\r"];
+    const CLOSING_BRACKET = ')';
+
+    protected $allowChar = [self::OPENING_BRACKET, self::CLOSING_BRACKET, ' ', "\t", "\n", "\r"];
 
     protected $data = [];
 
@@ -61,8 +64,8 @@ class Brackets
     protected function verifyCount()
     {
         $itemCount = array_count_values($this->data);
-        $countOpened = $itemCount['('] ?? 0;
-        $countClosed = $itemCount[')'] ?? 0;
+        $countOpened = $itemCount[self::OPENING_BRACKET] ?? 0;
+        $countClosed = $itemCount[self::CLOSING_BRACKET] ?? 0;
         return $countOpened == $countClosed;
     }
 
@@ -70,10 +73,10 @@ class Brackets
     {
         $level = 0;
         foreach ($this->data as $ch) {
-            if ('(' == $ch) {
+            if (self::OPENING_BRACKET == $ch) {
                 $level++;
 
-            } elseif (')' == $ch) {
+            } elseif (self::CLOSING_BRACKET == $ch) {
                 if ($level < 1) {
                     return false;
                 }
@@ -93,7 +96,7 @@ class Brackets
         $stack = [];
         $id = 1;
         foreach ($this->data as $key => $ch) {
-            if ('(' == $ch) {
+            if (self::OPENING_BRACKET == $ch) {
                 $this->nSet[$id] = [
                     'begin' => $key,
                     'lgt' => $id,
@@ -104,7 +107,7 @@ class Brackets
                 $id++;
                 $level++;
 
-            } elseif (')' == $ch) {
+            } elseif (self::CLOSING_BRACKET == $ch) {
                 if ($level < 1) {
                     return false;
                 }
