@@ -15,6 +15,14 @@ class BracketsTest extends TestCase
         return $brackets->verify();
     }
 
+    private function getDataOfInstanceWithAST($input)
+    {
+        $brackets = new Brackets();
+        $brackets->load($input);
+        $brackets->verify(true);
+        return $brackets->getAST();
+    }
+
     /**
      * @dataProvider dataProvider
      */
@@ -23,14 +31,38 @@ class BracketsTest extends TestCase
         $result = $this->getDataOfInstance($input);
         $this->assertEquals($expected, $result);
     }
+
     public function dataProvider()
     {
         return [
             [" () ", true],
+            ["(", false],
             [")(", false],
             ["\t(\r()()\n)(((())))", true],
             ["())(()", false],
             ["\t\r\n", true],
+        ];
+    }
+
+    /**
+     * @dataProvider dataProviderAST
+     */
+/*    public function testExpressionsAST($input, $expected)
+    {
+        $result = $this->getDataOfInstanceWithAST($input);
+        $this->assertEquals($expected, $result, "\$canonicalize = true", $delta = 0.0, $maxDepth = 10, $canonicalize = true);
+    }*/
+
+
+    public function dataProviderAST()
+    {
+        return [
+            [" () ", []],
+            ["(", []],
+            [")(", []],
+            ["\t(\r()()\n)(((())))", []],
+            ["())(()", []],
+            ["\t\r\n", []],
         ];
     }
 

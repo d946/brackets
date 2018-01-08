@@ -11,7 +11,7 @@ class Brackets
 
     protected $data = [];
 
-    protected $nSets;
+    protected $nSets = [];
 
     public function load($expression)
     {
@@ -44,6 +44,11 @@ class Brackets
     public function setAllowChar($allowChar)
     {
         $this->allowChar = $allowChar;
+    }
+
+    public function getAST()
+    {
+        return $this->nSets;
     }
 
     protected function validate()
